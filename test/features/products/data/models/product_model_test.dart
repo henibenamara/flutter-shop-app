@@ -16,7 +16,7 @@ void main() {
   });
 
   test('copes with a product that has no brand, rating or images', () {
-    final product = ProductModel.fromJson({'id': 2, 'title': 'Bare', 'price': 5});
+    final product = ProductModel.fromJson(const {'id': 2, 'title': 'Bare', 'price': 5});
 
     expect(product.brand, isNull);
     expect(product.rating, 0);
