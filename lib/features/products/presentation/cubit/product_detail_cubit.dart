@@ -30,7 +30,9 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
 
   Future<void> load(int productId) async {
     _productId = productId;
-    emit(const ProductDetailState());
+    if (state.status != ProductDetailStatus.loading) {
+      emit(const ProductDetailState());
+    }
     final result = await _getProduct(productId);
     if (isClosed) return;
     switch (result) {
