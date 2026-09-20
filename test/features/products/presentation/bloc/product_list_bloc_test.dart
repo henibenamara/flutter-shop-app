@@ -91,13 +91,17 @@ void main() {
         when(() => search(query: 'phone', skip: 0))
             .thenAnswer((_) async => Ok(_page([9], total: 1)));
       },
-      build: buildBloc,
+      build: () => ProductListBloc(
+        search,
+        searchDebounce: const Duration(milliseconds: 20),
+      ),
       act: (bloc) {
         bloc
           ..add(const ProductSearchChanged('p'))
           ..add(const ProductSearchChanged('ph'))
           ..add(const ProductSearchChanged('phone'));
       },
+      wait: const Duration(milliseconds: 200),
       expect: () => [
         const ProductListState(status: ProductListStatus.loading, query: 'phone'),
         ProductListState(
