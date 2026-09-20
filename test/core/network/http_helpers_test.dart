@@ -81,7 +81,7 @@ void main() {
     });
 
     test('turns a bad cast into a ServerException', () {
-      const Object? value = 5;
+      const Object value = 5;
 
       expect(
         () => parseOrThrow(() => value as String),
