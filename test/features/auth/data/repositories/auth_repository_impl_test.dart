@@ -35,7 +35,10 @@ void main() {
 
       final result = await repository.login(username: 'emilys', password: 'pw');
 
-      expect(result, isA<Ok<Session>>().having((ok) => ok.value, 'value', testSession));
+      expect(
+        result,
+        isA<Ok<Session>>().having((ok) => ok.value, 'value', testSessionModel),
+      );
       verify(() => local.saveSession(testSessionModel)).called(1);
     });
 
@@ -81,7 +84,10 @@ void main() {
 
       final result = await repository.restoreSession();
 
-      expect(result, isA<Ok<Session?>>().having((ok) => ok.value, 'value', testSession));
+      expect(
+        result,
+        isA<Ok<Session?>>().having((ok) => ok.value, 'value', testSessionModel),
+      );
     });
 
     test('returns null when nobody is signed in', () async {
