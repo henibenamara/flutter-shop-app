@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Analyze and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter --version
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test --coverage
+
+  build-web:
+    name: Build for web
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Add the web platform files (not stored in this repo)
+        run: |
+          flutter create --platforms=web --project-name flutter_shop_app /tmp/web_shell
+          cp -r /tmp/web_shell/web ./web
+      - run: flutter pub get
+      - run: flutter build web --release --base-href "/flutter-shop-app/"
