@@ -2,8 +2,6 @@
 
 ![CI](https://github.com/henibenamara/flutter-shop-app/actions/workflows/ci.yml/badge.svg)
 
-**[Live demo](https://henibenamara.github.io/flutter-shop-app/)**: sign in with the demo account (button on the login page), search the catalog, open a product and save favorites.
-
 A shop client that has to deal with what real apps deal with: a login that decides where you can navigate, a paged list you can search as you type, network errors, and data that must survive without a connection. It talks to the free [DummyJSON](https://dummyjson.com) API, so there is no backend to run.
 
 It is the bigger sibling of [flutter-clean-architecture](https://github.com/henibenamara/flutter-clean-architecture): same layering, more moving parts.
@@ -71,7 +69,7 @@ Run `flutter test`. About 100 tests, none of which touch the network.
 
 ## Continuous integration
 
-GitHub Actions runs `flutter analyze` (lints are errors), the tests, and a web build on every push. The build is what the live demo serves.
+GitHub Actions runs `flutter analyze` (lints are errors), the tests, and a web build on every push. The web build checks that the app compiles for the browser.
 
 ## Stack
 
